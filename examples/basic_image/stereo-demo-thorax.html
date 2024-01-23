@@ -1,25 +1,22 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>My A-Frame Scene</title>
-  <script src="https://aframe.io/releases/latest/aframe.min.js"></script>
-  <script src="{{site.baseurl}}/dist/aframe-stereo-component.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Landscape Image</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body>
-  <a-scene>
-      <a-sky color="#FFF"></a-sky>
-      <a-light color="#333" position="0 5 0" type="ambient" intensity="0.2"></a-light>
-      <a-light type="point" color="#EEE" intensity="1.0" position="3 3 10"></a-light>
-
-      <!-- 'left' eye entities will pass trough the camera in non-VR mode -->
-
-      <a-camera position="0 0 10" cursor-color="black" stereocam="eye:left;"></a-camera>
-
-      <!-- in VR mode, the first box is displayed only in the left eye, the second one in the right eye -->
-
-      <a-entity geometry="primitive: box" material="color: #C03546" stereo="eye:left"></a-entity>
-      <a-entity geometry="primitive: box" material="color: #3546C0" position="0 5 0" stereo="eye: right"></a-entity>
-
-  </a-scene>
-
- </body>
- </html>
+    <img src="https://malyalar.github.io/virtualvesalius/examples/basic_image/textures/stereo-demo-thorax.jpeg" alt="Landscape Image">
+</body>
+</html>
