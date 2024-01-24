@@ -37,6 +37,9 @@
             "image2_00.jpeg",
             "image2_01.jpeg",
             "image2_02.jpeg",
+            "image3_00.jpeg",
+            "image3_01.jpeg",
+            "image3_02.jpeg"
             // ...
         ];
 
@@ -56,7 +59,7 @@
                     const image = document.createElement('img');
                     image.src = currentImageSrc;
                     image.alt = `Image ${currentImageIndex + 1}`;
-                    image.style.maxWidth = '50%';
+                    image.style.maxWidth = '30%';
                     image.style.height = 'auto';
                     imageContainer.appendChild(image);
                 }
@@ -67,7 +70,7 @@
                 const image = document.createElement('img');
                 image.src = currentImageSrc;
                 image.alt = `Image ${currentImageIndex + 1}`;
-                image.style.maxWidth = '100%';
+                image.style.maxWidth = '75%';
                 image.style.height = 'auto';
                 imageContainer.appendChild(image);
             }
