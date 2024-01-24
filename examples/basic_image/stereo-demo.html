@@ -14,59 +14,65 @@
             height: 100vh;
             background-color: #f0f0f0;
         }
+        #imageContainer {
+            display: flex;
+            max-width: 100%;
+        }
         img {
-            max-width: 50%; /* Set max-width to 50% for side-by-side images */
+            max-width: 50%;
             height: auto;
         }
     </style>
 </head>
 <body>
-    <img id="slideshowImage" src="https://malyalar.github.io/virtualvesalius/examples/basic_image/textures/image1_00.jpeg" alt="Image 1">
+    <div id="imageContainer">
+        <img id="slideshowImage" src="https://malyalar.github.io/virtualvesalius/examples/basic_image/textures/image1_00.jpeg" alt="Image 1">
+    </div>
 
     <script>
-        // Array of image filenames in the textures directory
         const imageFilenames = [
             "image1_00.jpeg",
             "image1_01.jpeg",
             "image1_02.jpeg",
             "image2_00.jpeg",
             "image2_01.jpeg",
-            "image2_02.jpeg"
-            "image3_00.jpeg",
-            "image3_01.jpeg",
-            "image3_02.jpeg"
+            "image2_02.jpeg",
             // ...
         ];
 
         let currentImageIndex = 0;
-        const slideshowImage = document.getElementById('slideshowImage');
+        const imageContainer = document.getElementById('imageContainer');
 
-        // Function to update the image source
         function showNextImage() {
             currentImageIndex = (currentImageIndex + 1) % imageFilenames.length;
             const currentImageSrc = `https://malyalar.github.io/virtualvesalius/examples/basic_image/textures/${imageFilenames[currentImageIndex]}`;
 
             if (currentImageSrc.endsWith('_00.jpeg') || currentImageSrc.endsWith('_01.jpeg')) {
                 // Display the current image twice side by side
-                slideshowImage.src = null; // Clear previous image
-                slideshowImage.src = currentImageSrc;
+                imageContainer.innerHTML = ''; // Clear previous images
 
-                // Create another image element for the second image
-                const secondImage = document.createElement('img');
-                secondImage.src = currentImageSrc;
-                secondImage.alt = `Image ${currentImageIndex + 1}`;
-                secondImage.style.maxWidth = '50%'; // Set max-width to 50% for side-by-side images
-                secondImage.style.height = 'auto';
-
-                // Append the second image to the body
-                document.body.appendChild(secondImage);
+                // Create two image elements and append them to the container
+                for (let i = 0; i < 2; i++) {
+                    const image = document.createElement('img');
+                    image.src = currentImageSrc;
+                    image.alt = `Image ${currentImageIndex + 1}`;
+                    image.style.maxWidth = '50%';
+                    image.style.height = 'auto';
+                    imageContainer.appendChild(image);
+                }
             } else {
                 // Display stereoscopic image as is
-                slideshowImage.src = currentImageSrc;
+                imageContainer.innerHTML = ''; // Clear previous images
+
+                const image = document.createElement('img');
+                image.src = currentImageSrc;
+                image.alt = `Image ${currentImageIndex + 1}`;
+                image.style.maxWidth = '100%';
+                image.style.height = 'auto';
+                imageContainer.appendChild(image);
             }
         }
 
-        // Event listener for tap or click on the body
         document.body.addEventListener('click', showNextImage);
     </script>
 </body>

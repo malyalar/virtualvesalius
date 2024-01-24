@@ -2,13 +2,36 @@
 # an empty front matter
 ---
 <!DOCTYPE html>
+
+
+<style>
+  .nav-main ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center; /* Center the navigation items */
+  }
+
+  .nav-main li {
+    display: inline-block;
+    margin-right: 10px; /* Adjust the right margin for spacing */
+    font-size: 16px; /* Adjust the font size */
+  }
+
+  .nav-main a {
+    text-decoration: none;
+    color: #333; /* Set the text color */
+  }
+</style>
+
+
 <html lang="en">
 
   {% seo %}
   {% include head.html %}
 
   <body>
-    <nav class="nav-main" style="margin-top: 3px;">
+    <nav class="nav-main">
       <ul>
         <li class="hvr-underline-reveal"><a href="{{ site.baseurl }}/modules/">modules</a></li>
         <li class="hvr-underline-reveal"><a href="{{ site.baseurl }}/about/">about</a></li>
