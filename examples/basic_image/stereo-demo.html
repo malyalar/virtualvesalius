@@ -18,10 +18,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            max-width: 100%;
+            max-width: 50%;
         }
         img {
-            max-width: 45%; /* Set max-width to make the images a bit smaller */
+            max-width: 100%; /* Set max-width to make the images a bit smaller */
             height: auto;
         }
     </style>
@@ -47,24 +47,42 @@
 
         let currentImageIndex = 0;
         const imageContainer = document.getElementById('imageContainer');
+        const slideshowImage = document.getElementById('slideshowImage');
 
-        function showNextImage() {
-            currentImageIndex = (currentImageIndex + 1) % imageFilenames.length;
+        function renderImage() {
             const currentImageSrc = `https://malyalar.github.io/virtualvesalius/examples/basic_image/textures/${imageFilenames[currentImageIndex]}`;
 
             // Display the current image twice side by side
             imageContainer.innerHTML = ''; // Clear previous images
 
             // Create two image elements and append them to the container
-            for (let i = 0; i < 2; i++) {
+            if (!currentImageSrc.endsWith('_02.jpeg')) {
+                for (let i = 0; i < 2; i++) {
+                    const image = document.createElement('img');
+                    image.src = currentImageSrc;
+                    image.alt = `Image ${currentImageIndex + 1}`;
+                    image.style.maxWidth = '45%'; // Set max-width to make the images a bit smaller
+                    image.style.height = 'auto';
+                    imageContainer.appendChild(image);
+                }
+            } else {
+                // If the image ends with '_02', display it as a single image
                 const image = document.createElement('img');
                 image.src = currentImageSrc;
                 image.alt = `Image ${currentImageIndex + 1}`;
-                image.style.maxWidth = '45%'; // Set max-width to make the images a bit smaller
+                image.style.maxWidth = '100%'; // Set max-width to make the images a bit smaller
                 image.style.height = 'auto';
                 imageContainer.appendChild(image);
             }
         }
+
+        function showNextImage() {
+            currentImageIndex = (currentImageIndex + 1) % imageFilenames.length;
+            renderImage();
+        }
+
+        // Initial rendering
+        renderImage();
 
         document.body.addEventListener('click', showNextImage);
     </script>
