@@ -16,10 +16,12 @@
         }
         #imageContainer {
             display: flex;
+            justify-content: center;
+            align-items: center;
             max-width: 100%;
         }
         img {
-            max-width: 50%;
+            max-width: 45%; /* Set max-width to make the images a bit smaller */
             height: auto;
         }
     </style>
@@ -50,27 +52,15 @@
             currentImageIndex = (currentImageIndex + 1) % imageFilenames.length;
             const currentImageSrc = `https://malyalar.github.io/virtualvesalius/examples/basic_image/textures/${imageFilenames[currentImageIndex]}`;
 
-            if (currentImageSrc.endsWith('_00.jpeg') || currentImageSrc.endsWith('_01.jpeg')) {
-                // Display the current image twice side by side
-                imageContainer.innerHTML = ''; // Clear previous images
+            // Display the current image twice side by side
+            imageContainer.innerHTML = ''; // Clear previous images
 
-                // Create two image elements and append them to the container
-                for (let i = 0; i < 2; i++) {
-                    const image = document.createElement('img');
-                    image.src = currentImageSrc;
-                    image.alt = `Image ${currentImageIndex + 1}`;
-                    image.style.maxWidth = '30%';
-                    image.style.height = 'auto';
-                    imageContainer.appendChild(image);
-                }
-            } else {
-                // Display stereoscopic image as is
-                imageContainer.innerHTML = ''; // Clear previous images
-
+            // Create two image elements and append them to the container
+            for (let i = 0; i < 2; i++) {
                 const image = document.createElement('img');
                 image.src = currentImageSrc;
                 image.alt = `Image ${currentImageIndex + 1}`;
-                image.style.maxWidth = '75%';
+                image.style.maxWidth = '45%'; // Set max-width to make the images a bit smaller
                 image.style.height = 'auto';
                 imageContainer.appendChild(image);
             }
