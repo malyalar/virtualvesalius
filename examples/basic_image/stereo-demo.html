@@ -3,21 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Image Slideshow</title>
+    <title>Stereoscopic Image Viewer</title>
     <style>
         body {
             margin: 0;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
         }
         img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 50%; /* Set max-width to 50% for side-by-side images */
+            height: auto;
         }
     </style>
 </head>
 <body>
-    <img id="slideshowImage" src="https://malyalar.github.io/virtualvesalius/examples/basic_image/textures/stereo-demo-thorax.jpeg" alt="Image">
+    <img id="slideshowImage" src="https://malyalar.github.io/virtualvesalius/examples/basic_image/textures/image1_00.jpeg" alt="Image 1">
 
     <script>
         // Array of image filenames in the textures directory
@@ -40,8 +44,28 @@
         // Function to update the image source
         function showNextImage() {
             currentImageIndex = (currentImageIndex + 1) % imageFilenames.length;
-            const nextImageSrc = `https://malyalar.github.io/virtualvesalius/examples/basic_image/textures/${imageFilenames[currentImageIndex]}`;
-            slideshowImage.src = nextImageSrc;
+            const currentImageSrc = `https://malyalar.github.io/virtualvesalius/examples/basic_image/textures/${imageFilenames[currentImageIndex]}`;
+            
+            if (currentImageSrc.endsWith('_02.jpeg')) {
+                // Display stereoscopic image as is
+                slideshowImage.src = currentImageSrc;
+            } else {
+                // Display two images side by side
+                const nextImageIndex = (currentImageIndex + 1) % imageFilenames.length;
+                const nextImageSrc = `https://malyalar.github.io/virtualvesalius/examples/basic_image/textures/${imageFilenames[nextImageIndex]}`;
+                slideshowImage.src = null; // Clear previous image
+                slideshowImage.src = currentImageSrc;
+                
+                // Create another image element for the second image
+                const secondImage = document.createElement('img');
+                secondImage.src = nextImageSrc;
+                secondImage.alt = `Image ${nextImageIndex + 1}`;
+                secondImage.style.maxWidth = '50%'; // Set max-width to 50% for side-by-side images
+                secondImage.style.height = 'auto';
+                
+                // Append the second image to the body
+                document.body.appendChild(secondImage);
+            }
         }
 
         // Event listener for tap or click on the body
