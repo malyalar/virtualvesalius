@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Stereoscopic Image Viewer</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        img {
+            max-width: 50%; /* Set max-width to 50% for side-by-side images */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <img id="slideshowImage" src="https://<username>.github.io/<repository-name>/examples/basic_image/textures/image1_00.jpeg" alt="Image 1">
+
+    <script>
+        // Array of image filenames in the textures directory
+        const imageFilenames = [
+            "image1_00.jpeg",
+            "image1_01.jpeg",
+            "image1_02.jpeg",
+            "image2_00.jpeg",
+            "image2_01.jpeg",
+            "image2_02.jpeg",
+            "image3_00.jpeg",
+            "image3_01.jpeg",
+            "image3_02.jpeg",
+            // ...
+        ];
+
+        let currentImageIndex = 0;
+        const slideshowImage = document.getElementById('slideshowImage');
+
+        // Function to update the image source
+        function showNextImage() {
+            currentImageIndex = (currentImageIndex + 1) % imageFilenames.length;
+            const currentImageSrc = `https://<username>.github.io/<repository-name>/examples/basic_image/textures/${imageFilenames[currentImageIndex]}`;
+            
+            if (currentImageSrc.endsWith('_02.jpeg')) {
+                // Display stereoscopic image as is
+                slideshowImage.src = currentImageSrc;
+            } else {
+                // Display two images side by side
+                const nextImageIndex = (currentImageIndex + 1) % imageFilenames.length;
+                const nextImageSrc = `https://<username>.github.io/<repository-name>/examples/basic_image/textures/${imageFilenames[nextImageIndex]}`;
+                slideshowImage.src = null; // Clear previous image
+                slideshowImage.src = currentImageSrc;
+                
+                // Create another image element for the second image
+                const secondImage = document.createElement('img');
+                secondImage.src = nextImageSrc;
+                secondImage.alt = `Image ${nextImageIndex + 1}`;
+                secondImage.style.maxWidth = '50%'; // Set max-width to 50% for side-by-side images
+                secondImage.style.height = 'auto';
+                
+                // Append the second image to the body
+                document.body.appendChild(secondImage);
+            }
+        }
+
+        // Event listener for tap or click on the body
+        document.body.addEventListener('click', showNextImage);
+    </script>
+</body>
+</html>
