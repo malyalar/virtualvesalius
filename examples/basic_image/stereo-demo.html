@@ -31,7 +31,7 @@
             "image1_02.jpeg",
             "image2_00.jpeg",
             "image2_01.jpeg",
-            "image2_02.jpeg",
+            "image2_02.jpeg"
             "image3_00.jpeg",
             "image3_01.jpeg",
             "image3_02.jpeg"
@@ -45,26 +45,24 @@
         function showNextImage() {
             currentImageIndex = (currentImageIndex + 1) % imageFilenames.length;
             const currentImageSrc = `https://malyalar.github.io/virtualvesalius/examples/basic_image/textures/${imageFilenames[currentImageIndex]}`;
-            
-            if (currentImageSrc.endsWith('_02.jpeg')) {
-                // Display stereoscopic image as is
-                slideshowImage.src = currentImageSrc;
-            } else {
-                // Display two images side by side
-                const nextImageIndex = (currentImageIndex + 1) % imageFilenames.length;
-                const nextImageSrc = `https://malyalar.github.io/virtualvesalius/examples/basic_image/textures/${imageFilenames[nextImageIndex]}`;
+
+            if (currentImageSrc.endsWith('_00.jpeg') || currentImageSrc.endsWith('_01.jpeg')) {
+                // Display the current image twice side by side
                 slideshowImage.src = null; // Clear previous image
                 slideshowImage.src = currentImageSrc;
-                
+
                 // Create another image element for the second image
                 const secondImage = document.createElement('img');
-                secondImage.src = nextImageSrc;
-                secondImage.alt = `Image ${nextImageIndex + 1}`;
+                secondImage.src = currentImageSrc;
+                secondImage.alt = `Image ${currentImageIndex + 1}`;
                 secondImage.style.maxWidth = '50%'; // Set max-width to 50% for side-by-side images
                 secondImage.style.height = 'auto';
-                
+
                 // Append the second image to the body
                 document.body.appendChild(secondImage);
+            } else {
+                // Display stereoscopic image as is
+                slideshowImage.src = currentImageSrc;
             }
         }
 
