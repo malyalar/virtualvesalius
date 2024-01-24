@@ -17,7 +17,7 @@
     </style>
 </head>
 <body>
-    <img id="slideshowImage" src="https://<username>.github.io/<repository-name>/examples/basic_image/textures/stereo-demo-thorax.jpeg" alt="Image">
+    <img id="slideshowImage" src="https://malyalar.github.io/virtualvesalius/examples/basic_image/textures/stereo-demo-thorax.jpeg" alt="Image">
 
     <script>
         // Array of image filenames in the textures directory
@@ -40,7 +40,7 @@
         // Function to update the image source
         function showNextImage() {
             currentImageIndex = (currentImageIndex + 1) % imageFilenames.length;
-            const nextImageSrc = `https://<username>.github.io/<repository-name>/examples/basic_image/textures/${imageFilenames[currentImageIndex]}`;
+            const nextImageSrc = `https://malyalar.github.io/virtualvesalius/examples/basic_image/textures/${imageFilenames[currentImageIndex]}`;
             slideshowImage.src = nextImageSrc;
         }
 
